@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!-- Babel is needed to translate JSX to JS -->
+        <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <script type="text/babel">
+            
+            function Welcome(props) {
+                return <h1>Hello, {props.name}</h1>;
+            }
+
+            function AddNames() {
+                return (
+                    <div>
+                        <Welcome name="Sung"/>
+                    </div>
+                );
+            }
+
+            class WelcomeClass extends React.Component {
+                constructor(props) {
+                    super(props);
+                    // Set the state
+                    this.state = {name: "Richard"}
+                }
+
+                // Lifecycle method, covered later
+                componentDidMount() {
+                    // Do not do this:
+                    // this.state.name ="Sung"
+                    // Do this:
+                    this.setState({name: "Sung"});
+                }
+
+                // render gets called every time state gets declared or changed.
+                render() {
+                    console.log(this.state);
+                    return <h1>Hello {this.state.name} from class component</h1>;
+                }
+            }
+
+            // Only use one ReactDOM.render
+            // Functional component becomes render component and shown where to render.
+            // document.getElementById('root') is the object to render to.
+            ReactDOM.render(
+                // Give all rendered elements a parent node by enclosing in div.
+                // Could also just do <Welcome name="Sung"/> here
+                <div>
+                    <AddNames/>
+                    <WelcomeClass/>
+                </div>
+                ,document.getElementById('root'));
+
+      </script>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+</html>
